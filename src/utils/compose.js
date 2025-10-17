@@ -257,9 +257,10 @@ export const renderChat = async ({
         });
     };
 
+    let stream = null;
     try {
         event?.('START');
-        const stream = await chat({ model, baseUrl, messages, signal, stream: true });
+        stream = await chat({ model, baseUrl, messages, signal, stream: true });
         const reader = stream.getReader();
 
         while (true) {
@@ -299,7 +300,7 @@ export const renderChat = async ({
             processChunk(chunk);
         }
     } catch (error) {
-        console.error('渲染聊天内容时出错:', error);
+        // console.error('渲染聊天内容时出错:', error, stream);
         if (error.name === 'AbortError') {
             event?.('STOP', { reason: '请求被终止' });
             let endData = {
@@ -311,7 +312,8 @@ export const renderChat = async ({
             endData.message.contents = state.contents;
             callback(endData);
         } else {
-            event?.('ERROR', { reason: '与AI的通信出错', code: 401 });
+            const message = stream?.message;
+            event?.('ERROR', { reason: '与AI的通信出错', code: message?.code || 401, message: message?.message });
             throw error;
         }
     }
