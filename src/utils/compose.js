@@ -311,7 +311,7 @@ export const renderChat = async ({
             endData.message.contents = state.contents;
             callback(endData);
         } else {
-            event?.('ERROR', { reason: '与AI的通信出错' });
+            event?.('ERROR', { reason: '与AI的通信出错', code: 401 });
             throw error;
         }
     }
