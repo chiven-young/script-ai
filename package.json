@@ -1,27 +1,46 @@
 {
   "name": "script-ai",
-  "version": "1.0.0",
-  "description": "Collection of Large Model Methods",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "A zero-dependency, pure-JS agent core: normalized model providers, host-injected tools, and a ReAct loop. Runs in browser, WebView, Node and Workers.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./types/script-ai.d.ts",
+      "import": "./index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "src/",
+    "types/",
+    "README.md",
+    "README.zh-CN.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test test/",
+    "typecheck": "tsc --allowJs --checkJs --noEmit --strict --target es2022 --module nodenext --moduleResolution nodenext index.js src/*.js src/providers/*.js"
   },
   "keywords": [
-    "AI",
-    "Machine Learning",
-    "Deep Learning",
-    "Large Model"
+    "ai",
+    "agent",
+    "llm",
+    "tool-calling",
+    "openai-compatible",
+    "ollama",
+    "zero-dependency"
   ],
   "author": "Chiven Young",
   "license": "MIT",
-  "dependencies": {
-    "axios": "^1.8.1",
-    "highlight.js": "^11.11.1",
-    "marked": "^15.0.7"
-  },
-  "homepage": "https://www.chiven.net/#/post/cid-1e2b262d-473d-4e8a-9b24-72f6e587299b",
+  "homepage": "https://github.com/chiven-young/script-ai",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chiven-young/script-ai"
-  }
+    "url": "https://github.com/chiven-young/script-ai.git"
+  },
+  "bugs": "https://github.com/chiven-young/script-ai/issues"
 }

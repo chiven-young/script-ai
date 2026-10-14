@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>script-ai · browser-basic</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font: 14px/1.6 system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    label { display: block; margin: .6rem 0 .2rem; font-weight: 600; }
+    input, textarea { width: 100%; box-sizing: border-box; padding: .4rem .6rem; font: inherit;
+      border: 1px solid #8884; border-radius: 6px; background: transparent; color: inherit; }
+    button { margin-top: .8rem; padding: .5rem 1.2rem; font: inherit; cursor: pointer;
+      border: 1px solid #8884; border-radius: 6px; background: #4f7cff1a; }
+    button:disabled { opacity: .5; cursor: wait; }
+    pre#log { white-space: pre-wrap; background: #8881; border-radius: 8px; padding: 1rem; min-height: 8rem; }
+    .row { display: flex; gap: 1rem; } .row > * { flex: 1; }
+    code { background: #8882; padding: .1em .35em; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>script-ai · browser-basic</h1>
+  <p>核心零依赖、零 DOM——直接在浏览器里跑。填入任意 CORS 开放的 OpenAI 兼容端点：</p>
+
+  <div class="row">
+    <div>
+      <label for="baseURL">baseURL</label>
+      <input id="baseURL" value="http://localhost:11434/v1" spellcheck="false" />
+    </div>
+    <div>
+      <label for="model">model</label>
+      <input id="model" value="qwen2.5" spellcheck="false" />
+    </div>
+  </div>
+  <label for="apiKey">apiKey（可选）</label>
+  <input id="apiKey" type="password" placeholder="sk-…" spellcheck="false" />
+  <label for="system">systemPrompt</label>
+  <input id="system" value="You are a helpful assistant." />
+  <label for="prompt">prompt</label>
+  <textarea id="prompt" rows="2">用一句话介绍你自己</textarea>
+  <button id="run">运行</button>
+
+  <h2>输出</h2>
+  <pre id="log"></pre>
+
+  <p style="opacity:.7">
+    本地 Ollama 需允许跨域：<code>OLLAMA_ORIGINS=* ollama serve</code>。
+    用任意静态服务器打开本页即可，例如 <code>npx serve .</code>。
+  </p>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
